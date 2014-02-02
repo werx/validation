@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+		backupStaticAttributes="false"
+		bootstrap="./phpunit.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		processIsolation="false"
+		stopOnFailure="false"
+		syntaxCheck="true">
+
+	<testsuites>
+		<testsuite name="AllTests">
+			<directory>./tests</directory>
+		</testsuite>
+		<testsuite name="ValidatorTests">
+			<file>./tests/ValidatorTests.php</file>
+		</testsuite>
+		<testsuite name="EngineTests">
+			<file>./tests/EngineTests.php</file>
+		</testsuite>
+
+	</testsuites>
+
+<!--
+	<php>
+		<env name="" value="" />
+		<env name="" value="" />
+	</php>
+-->
+
+	<filter>
+		<blacklist>
+			<directory>./vendor</directory>
+		</blacklist>
+		<whitelist>
+			<directory suffix=".php">src</directory>
+		</whitelist>
+	</filter>
+</phpunit>

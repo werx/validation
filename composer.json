@@ -1,0 +1,29 @@
+{
+	"name": "joshmoody/validation",
+	"type": "library",
+	"license": "MIT",
+	"description": "Simple form validation",
+
+	"authors":[
+		{
+			"name": "Josh Moody",
+			"email": "jgmoody@gmail.com"
+		}
+	],
+		 
+	"require": {
+		"php": ">= 5.4"
+	},
+
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*",
+		"squizlabs/php_codesniffer": "1.*"
+	},
+			
+	"autoload":	{
+		"psr-4": {
+			"joshmoody\\Validation\\": "src/",
+			"joshmoody\\Validation\\Tests\\": "tests/"
+		}
+	}
+}

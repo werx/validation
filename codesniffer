@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+vendor/bin/phpcs --standard="./PSR2Tabs.xml" -p -v --ignore=vendor/* .
