@@ -2,6 +2,8 @@
 
 Simple data validation.
 
+[![Build Status](https://travis-ci.org/joshmoody/validation.png?branch=master)](https://travis-ci.org/joshmoody/validation) [![Total Downloads](https://poser.pugx.org/joshmoody/validation/downloads.png)](https://packagist.org/packages/joshmoody/validation) [![Latest Stable Version](https://poser.pugx.org/joshmoody/validation/v/stable.png)](https://packagist.org/packages/joshmoody/validation)
+
 ## Usage
 There are two components to this library. A set of validation methods and a validation engine.
 
