@@ -3,7 +3,7 @@
 	"type": "library",
 	"license": "MIT",
 	"description": "Validate individual data elements or group validation rules into sets to validate a form.",
-
+	"keywords": ["validation", "validator", "validate", "rules", "ruleset", "form"],
 	"authors":[
 		{
 			"name": "Josh Moody",
