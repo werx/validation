@@ -2,7 +2,7 @@
 	"name": "joshmoody/validation",
 	"type": "library",
 	"license": "MIT",
-	"description": "Simple form validation",
+	"description": "Validate individual data elements or group validation rules into sets to validate a form.",
 
 	"authors":[
 		{
