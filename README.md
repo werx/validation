@@ -12,10 +12,17 @@ There are two components to this library. A set of validation methods and a vali
 The Validator class can be used to quickly validate a single piece of input.
 
 ``` php
+include 'vendor/autoload.php';
+
 use joshmoody\Validation\Validator;
 
-$valid = Validator::minlength($input, 5);
+$input = 'foo';
+$valid = Validator::minlength($input, 4);
+var_dump($valid);
 
+/*
+bool(true)
+*/
 ```
 
 The following validators are available. Each validator returns a bool. `true` = passed validation, `false` = failed validation.
@@ -44,10 +51,10 @@ The following validators are available. Each validator returns a bool. `true` = 
 The Validation Engine is used to validate a set of data against a set of rules.
 
 #### Usage
-First, get an instance of the FormValidator:
+First, get an instance of the Validation Engine:
 
 ``` php
-use joshmoody\Validation\FormValidator;
+use joshmoody\Validation\Engine as FormValidator;
 
 $validator = new FormValidator;
 ```
@@ -145,7 +152,7 @@ Examples:
 ``` php
 
 $validator->addCustomMessage('required', "You didn't provide a value for {name}!");
-$validator->addCustomMessage('minlength', "Oops, {$name} must be at least %d characters long.");
+$validator->addCustomMessage('minlength', "Oops, {name} must be at least %d characters long.");
 ```
 
 
