@@ -16,6 +16,29 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(Validator::required(123));
 	}
 
+	public function testShouldFailValidDate()
+	{
+		$this->assertFalse(Validator::date('02/29/2014'));
+		$this->assertFalse(Validator::date('2014-02-29', 'YYYY-MM-DD'));
+		$this->assertFalse(Validator::date('04/31/2014'));
+		$this->assertFalse(Validator::date('06/31/2014'));
+		$this->assertFalse(Validator::date('09/31/2014'));
+		$this->assertFalse(Validator::date('11/31/2014'));
+	}
+
+	public function testShouldPassValidDate()
+	{
+		$this->assertTrue(Validator::date('02/29/2012'));
+		$this->assertTrue(Validator::date('2012-02-29', 'YYYY-MM-DD'));
+		$this->assertTrue(Validator::date('01/31/2014'));
+		$this->assertTrue(Validator::date('03/31/2014'));
+		$this->assertTrue(Validator::date('05/31/2014'));
+		$this->assertTrue(Validator::date('07/31/2014'));
+		$this->assertTrue(Validator::date('08/31/2014'));
+		$this->assertTrue(Validator::date('10/31/2014'));
+		$this->assertTrue(Validator::date('12/31/2014'));
+	}
+	
 	public function testShouldFailMinLength()
 	{
 		$this->assertFalse(Validator::minlength('12345', 6));

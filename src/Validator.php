@@ -9,6 +9,48 @@ class Validator
 		return empty($input) ? false : true;
 	}
 
+	// Datetime validattion from http://www.phpro.org/examples/Validate-Date-Using-PHP.html
+	public static function date($input, $format = 'MM/DD/YYYY')
+	{
+		switch($format) {
+			case 'YYYY/MM/DD':
+			case 'YYYY-MM-DD':
+			list($y, $m, $d) = preg_split('/[-\.\/ ]/', $input);
+			break;
+
+			case 'YYYY/DD/MM':
+			case 'YYYY-DD-MM':
+			list($y, $d, $m) = preg_split('/[-\.\/ ]/', $input);
+			break;
+
+			case 'DD-MM-YYYY':
+			case 'DD/MM/YYYY':
+			list($d, $m, $y) = preg_split('/[-\.\/ ]/', $input);
+			break;
+
+			case 'MM-DD-YYYY':
+			case 'MM/DD/YYYY':
+			list($m, $d, $y) = preg_split('/[-\.\/ ]/', $input);
+			break;
+
+			case 'YYYYMMDD':
+			$y = substr($input, 0, 4);
+			$m = substr($input, 4, 2);
+			$d = substr($input, 6, 2);
+			break;
+
+			case 'YYYYDDMM':
+			$y = substr($input, 0, 4);
+			$d = substr($input, 4, 2);
+			$m = substr($input, 6, 2);
+			break;
+
+			default:
+			throw new Exception("Invalid Date Format");
+		}
+		return checkdate($m, $d, $y);
+	}
+
 	public static function minlength($input = null, $length = 0)
 	{
 		if (empty($input)) {
@@ -82,7 +124,7 @@ class Validator
 		if (filter_var($input, FILTER_VALIDATE_INT) !== false) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -91,11 +133,11 @@ class Validator
 		if (empty($input)) {
 			return true;
 		}
-		
+
 		if (filter_var($input, FILTER_VALIDATE_FLOAT) !== false) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -117,7 +159,7 @@ class Validator
 		if (filter_var($input, FILTER_VALIDATE_EMAIL) !== false) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -130,7 +172,7 @@ class Validator
 		if (filter_var($input, FILTER_VALIDATE_URL) !== false) {
 			return true;
 		}
-		
+
 		return false;
 	}
 

@@ -29,6 +29,8 @@ The following validators are available. Each validator returns a bool. `true` = 
 
 ``` php
 bool required (mixed $input)
+bool date (mixed $input [, $input_format = MM/DD/YYYY])
+	# Other input formats available YYYY/MM/DD, YYYY-MM-DD, YYYY/DD/MM, YYYY-DD-MM, DD-MM-YYYY, DD/MM/YYYY, MM-DD-YYYY, MM/DD/YYYY, YYYYMMDD, YYYYDDMM
 bool minlength(mixed $input, int $min)
 bool maxlength(mixed $input, int $max)
 bool exactlength(mixed $input, int $length)
