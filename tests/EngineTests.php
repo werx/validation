@@ -45,6 +45,19 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('Foo cannot be longer than 8 characters.', $message);
 	}
 	
+	public function testCanGetCustomMessages()
+	{
+		$validator = new Engine();
+		
+		$validator->addCustomMessage('required', "You didn't provide a value for {name}!");
+		$message = $validator->getMessage('Foo', 'required');
+		$this->assertEquals("You didn't provide a value for Foo!", $message);
+		
+		$validator->addCustomMessage('minlength', "Oops, {name} must be at least %d characters long.");
+		$message = $validator->getMessage('Foo', 'minlength', [8]);
+		$this->assertEquals('Oops, Foo must be at least 8 characters long.', $message);
+	}
+	
 	public function testShouldFailValidation()
 	{
 		$validator = new Engine();
