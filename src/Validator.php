@@ -12,6 +12,10 @@ class Validator
 	// Datetime validattion from http://www.phpro.org/examples/Validate-Date-Using-PHP.html
 	public static function date($input, $format = 'MM/DD/YYYY')
 	{
+		if (empty($input)) {
+			return true;
+		}
+		
 		switch($format) {
 			case 'YYYY/MM/DD':
 			case 'YYYY-MM-DD':

@@ -60,6 +60,17 @@ class Engine
 		return $return;
 	}
 
+	public function addRuleSet($ruleset)
+	{
+		if (!is_subclass_of($ruleset, 'joshmoody\Validation\Ruleset')) {
+			throw new Exception('ruleset must be a subclass of joshmoody\Validation\Ruleset');
+		}
+		
+		foreach ($ruleset->rules as $rule) {
+			$this->addRule($rule['field'], $rule['label'], $rule['rules']);
+		}
+	}
+	
 	public function addRule($field = null, $label = null, $rules = null)
 	{
 		if (empty($field) || empty($label) || empty($rules)) {
@@ -177,6 +188,7 @@ class Engine
 	{
 		$messages = [];
 		$messages['required'] = '{name} is a required field.';
+		$messages['date'] = '{name} must be a valid date.';
 		$messages['minlength'] = '{name} must be at least %s characters long.';
 		$messages['maxlength'] = '{name} cannot be longer than %d characters.';
 		$messages['exactlength'] = '{name} must be exactly %d characters.';

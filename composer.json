@@ -23,7 +23,8 @@
 	"autoload":	{
 		"psr-4": {
 			"joshmoody\\Validation\\": "src/",
-			"joshmoody\\Validation\\Tests\\": "tests/"
+			"joshmoody\\Validation\\Tests\\": "tests/",
+			"joshmoody\\Validation\\Tests\\Rulesets\\": "tests/Rulesets/"
 		}
 	}
 }

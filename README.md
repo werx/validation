@@ -83,6 +83,38 @@ Now you can get a validation result.
 $valid = $validator->validate($_POST);
 ```
 
+#### Rulesets
+What if you want to save groups of rules instead of adding each rule individually every time you want to validate them?  We've got you covered.
+
+Create a new class that extends joshmoody\Validation\Ruleset and add your rules in the constructor.
+
+``` php
+namespace your\namespace\Rulesets;
+
+use joshmoody\Validation\Ruleset;
+
+class Contact extends Ruleset
+{
+	public function __construct()
+	{
+		$this->addRule('firstname', 'First Name', 'required|minlength[2]');
+		$this->addRule('lastname', 'Last Name', 'required');
+		$this->addRule('phone', 'Phone Number', 'required|phone');
+		$this->addRule('email', 'Email Address', 'required|email');
+	}
+}
+```
+
+Then when you are ready to validate this group of rules:
+
+``` php
+$contact_rules = new your\namespace\Rulesets\Contact;
+$validator->addRuleset($contact_rules);
+$valid = $validator->validate();
+```
+
+#### Utility Methods
+
 There are a couple utilities to make dealing with validation results easier.
 
 ##### getErrorSummary()

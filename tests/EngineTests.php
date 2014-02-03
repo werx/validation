@@ -3,6 +3,7 @@
 namespace joshmoody\Validation\Tests;
 
 use joshmoody\Validation\Engine;
+use joshmoody\Validation\Tests\Rulesets as Rulesets;
 
 class EngineTests extends \PHPUnit_Framework_TestCase
 {
@@ -127,5 +128,18 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		$required = $validator->getRequiredFields();
 
 		$this->assertEquals(2, count($required), 'There should be 2 required fields here.');
+	}
+	
+	public function testCanProcessRuleSet()
+	{
+		$validator = new Engine();
+		$ruleset = new Rulesets\Sample;
+		$validator->addRuleset($ruleset);
+		
+		$result = $validator->validate(['firstname' => 'Josh', 'lastname' => 'Moody', 'dob' => '02/29/2014']);
+
+		$error_fields = $validator->getErrorFields();
+		
+		$this->assertEquals(1, count($error_fields), 'There should be 1 field with errors here.');
 	}
 }
