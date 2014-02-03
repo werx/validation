@@ -9,7 +9,7 @@ class Validator
 		return empty($input) ? false : true;
 	}
 
-	// Datetime validattion from http://www.phpro.org/examples/Validate-Date-Using-PHP.html
+	// Datetime validation from http://www.phpro.org/examples/Validate-Date-Using-PHP.html
 	public static function date($input, $format = 'MM/DD/YYYY')
 	{
 		if (empty($input)) {
