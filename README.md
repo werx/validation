@@ -1,11 +1,11 @@
 # Validation Library
 
-Simple data validation.
+Simple input validation.
 
 [![Build Status](https://travis-ci.org/joshmoody/validation.png?branch=master)](https://travis-ci.org/joshmoody/validation) [![Total Downloads](https://poser.pugx.org/joshmoody/validation/downloads.png)](https://packagist.org/packages/joshmoody/validation) [![Latest Stable Version](https://poser.pugx.org/joshmoody/validation/v/stable.png)](https://packagist.org/packages/joshmoody/validation)
 
 ## Usage
-There are two components to this library. A set of validation methods and a validation engine.
+There are two components to this library. A set of validation methods and an input validation engine.
 
 ### Validators
 
@@ -58,9 +58,9 @@ The Validation Engine is used to validate a set of data against a set of rules.
 First, get an instance of the Validation Engine:
 
 ``` php
-use joshmoody\Validation\Engine as FormValidator;
+use joshmoody\Validation\Engine as ValidationEngine;
 
-$validator = new FormValidator;
+$validator = new ValidationEngine;
 ```
 
 Then add rules:
