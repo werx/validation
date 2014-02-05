@@ -4,12 +4,7 @@ namespace joshmoody\Validation;
 
 class Ruleset
 {
-	public $rules;
-
-	public function __construct()
-	{
-		$this->rules = [];
-	}
+	public $rules = [];
 
 	public function addRule($field = null, $label = null, $rules = null)
 	{
