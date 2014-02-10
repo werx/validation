@@ -142,4 +142,20 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		
 		$this->assertEquals(1, count($error_fields), 'There should be 1 field with errors here.');
 	}
+	
+	public function testCanGetErrorDetail()
+	{
+		$validator = new Engine();
+		$validator->addRule('name', 'Name', 'required');
+		$validator->addRule('city', 'City', 'required');
+		$validator->addRule('state', 'State', 'required');
+		$validator->addRule('zip', 'Zip Code', 'required|zipcode');
+		$validator->addRule('phone', 'Phone Number', 'phone');
+		$validator->addRule('email', 'Email Address', 'required|email');
+		$result = $validator->validate(['zip' => '7220A', 'email' => 'josh@', 'phone' => '555']);
+
+		$error_detail = $validator->getErrorDetail();
+
+		$this->assertEquals(6, count($error_detail), 'There should be 6 fields with errors here.');
+	}
 }

@@ -160,6 +160,17 @@ class Engine
 		}
 	}
 	
+	public function getErrorDetail()
+	{
+		$detail = [];
+		
+		foreach ($this->errors as $field => $messages) {
+			$detail[] = ['field' => $field, 'messages' => $messages];
+		}
+		
+		return $detail;
+	}
+	
 	public function getErrorFields()
 	{
 		$fields = [];
