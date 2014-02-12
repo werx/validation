@@ -3,6 +3,7 @@
 namespace joshmoody\Validation;
 
 use \Exception;
+use \InvalidArgumentException;
 
 class Engine
 {
@@ -13,7 +14,7 @@ class Engine
 
 	public function __construct($validator = null)
 	{
-		if (empty($engine)) {
+		if (empty($validator)) {
 			// Use the default validation engine.
 			$this->validator = new Validator();
 		} else {
@@ -25,11 +26,6 @@ class Engine
 		$this->messages = [];
 
 		$this->loadDefaultMessages();
-	}
-
-	public function loadRules()
-	{
-		throw new Exception('Not Implemented');
 	}
 
 	public function parseRule($input)
@@ -63,7 +59,7 @@ class Engine
 	public function addRuleSet($ruleset)
 	{
 		if (!is_subclass_of($ruleset, 'joshmoody\Validation\Ruleset')) {
-			throw new Exception('ruleset must be a subclass of joshmoody\Validation\Ruleset');
+			throw new InvalidArgumentException('ruleset must be a subclass of joshmoody\Validation\Ruleset');
 		}
 		
 		foreach ($ruleset->rules as $rule) {
@@ -74,7 +70,7 @@ class Engine
 	public function addRule($field = null, $label = null, $rules = null)
 	{
 		if (empty($field) || empty($label) || empty($rules)) {
-			throw new Exception('No rule specified.');
+			throw new InvalidArgumentException('Field, Label, and Rules are required.');
 		}
 
 		// Add this field to our list of fields (unless it already exists).

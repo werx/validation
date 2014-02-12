@@ -12,7 +12,7 @@
 
 	<testsuites>
 		<testsuite name="AllTests">
-			<directory>./tests</directory>
+			<directory>./tests/</directory>
 		</testsuite>
 		<testsuite name="ValidatorTests">
 			<file>./tests/ValidatorTests.php</file>

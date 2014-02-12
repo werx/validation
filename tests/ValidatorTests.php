@@ -20,6 +20,10 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertFalse(Validator::date('02/29/2014'));
 		$this->assertFalse(Validator::date('2014-02-29', 'YYYY-MM-DD'));
+		$this->assertFalse(Validator::date('2014-29-02', 'YYYY-DD-MM'));
+		$this->assertFalse(Validator::date('29-02-2014', 'DD-MM-YYYY'));
+		$this->assertFalse(Validator::date('20140229', 'YYYYMMDD'));
+		$this->assertFalse(Validator::date('20142902', 'YYYYDDMM'));
 		$this->assertFalse(Validator::date('04/31/2014'));
 		$this->assertFalse(Validator::date('06/31/2014'));
 		$this->assertFalse(Validator::date('09/31/2014'));
@@ -28,8 +32,13 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 
 	public function testShouldPassValidDate()
 	{
+		$this->assertTrue(Validator::date());
 		$this->assertTrue(Validator::date('02/29/2012'));
 		$this->assertTrue(Validator::date('2012-02-29', 'YYYY-MM-DD'));
+		$this->assertTrue(Validator::date('2012-29-02', 'YYYY-DD-MM'));
+		$this->assertTrue(Validator::date('29-02-2012', 'DD-MM-YYYY'));
+		$this->assertTrue(Validator::date('20120229', 'YYYYMMDD'));
+		$this->assertTrue(Validator::date('20122902', 'YYYYDDMM'));
 		$this->assertTrue(Validator::date('01/31/2014'));
 		$this->assertTrue(Validator::date('03/31/2014'));
 		$this->assertTrue(Validator::date('05/31/2014'));
@@ -38,7 +47,15 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(Validator::date('10/31/2014'));
 		$this->assertTrue(Validator::date('12/31/2014'));
 	}
-	
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidDateFormatShouldThrowException()
+	{
+		Validator::date('02/29/2014', 'foo');
+	}
+
 	public function testShouldFailMinLength()
 	{
 		$this->assertFalse(Validator::minlength('12345', 6));

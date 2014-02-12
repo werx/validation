@@ -10,7 +10,7 @@ class Validator
 	}
 
 	// Datetime validation from http://www.phpro.org/examples/Validate-Date-Using-PHP.html
-	public static function date($input, $format = 'MM/DD/YYYY')
+	public static function date($input = null, $format = 'MM/DD/YYYY')
 	{
 		if (empty($input)) {
 			return true;
@@ -50,7 +50,7 @@ class Validator
 			break;
 
 			default:
-			throw new Exception("Invalid Date Format");
+			throw new \InvalidArgumentException("Invalid Date Format");
 		}
 		return checkdate($m, $d, $y);
 	}
