@@ -161,7 +161,6 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 
 	public function testShouldFailFloat()
 	{
-
 		$this->assertFalse(Validator::float('$123.01'));
 		$this->assertFalse(Validator::float('ABC'));
 	}
@@ -218,7 +217,7 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 
 	public function testShouldFailPhone()
 	{
-		$this->assertFalse(Validator::url('123456789'));
+		$this->assertFalse(Validator::phone('123456789'));
 	}
 
 	public function testShouldPassPhone()
