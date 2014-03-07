@@ -233,4 +233,13 @@ class Validator
 
 		return (bool) preg_match($regex, $input);
 	}
+	
+	public static function inlist($input = null, $list = [])
+	{
+		if (empty($input)) {
+			return true;
+		}
+
+		return in_array($input, $list);
+	}
 }

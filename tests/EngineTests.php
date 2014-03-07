@@ -203,4 +203,34 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals(6, count($error_detail), 'There should be 6 fields with errors here.');
 	}
+	
+	public function testCanGetDataField()
+	{
+		$validator = new Engine();
+		$validator->addRule('name', 'Name', 'required');
+		
+		$result = $validator->validate(['name' => 'Josh']);
+		
+		$this->assertEquals('Josh', $validator->getData('name'));
+	}
+
+	public function testCanGetDataArray()
+	{
+		$validator = new Engine();
+		$validator->addRule('name', 'Name', 'required');
+		
+		$result = $validator->validate(['name' => 'Josh']);
+		
+		$this->assertInternalType('array', $validator->getData());
+	}
+
+	public function testCanGetDataMissingReturnsNull()
+	{
+		$validator = new Engine();
+		$validator->addRule('name', 'Name', 'required');
+		
+		$result = $validator->validate(['name' => 'Josh']);
+		
+		$this->assertEquals(null, $validator->getData('foo'));
+	}
 }

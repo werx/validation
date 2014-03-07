@@ -289,4 +289,15 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(Validator::regex('abcdDEFG', '/[a-zA-Z]+/'));
 		$this->assertTrue(Validator::regex('ABCDEFG123', '/[a-zA-Z0-9]+/'));
 	}
+
+	public function testShouldFailInlist()
+	{
+		$this->assertFalse(Validator::inlist('ABCDEF', ['ABC','DEF']));
+	}
+	
+	public function testShouldPassInlist()
+	{
+		$this->assertTrue(Validator::inlist(null, ['ABC','DEF']));
+		$this->assertTrue(Validator::inlist('ABC', ['ABC','DEF']));
+	}
 }

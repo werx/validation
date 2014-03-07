@@ -11,6 +11,7 @@ class Engine
 	public $fields;
 	public $errors;
 	public $messages;
+	public $data;
 
 	public function __construct($validator = null)
 	{
@@ -21,10 +22,9 @@ class Engine
 			$this->validator = $validator;
 		}
 
-		$this->fields = [];
-		$this->errors = [];
-		$this->messages = [];
-
+		// Initialize default values for class variables.
+		$this->reset();
+		
 		$this->loadDefaultMessages();
 	}
 
@@ -95,6 +95,8 @@ class Engine
 
 	public function validate($data = [])
 	{
+		$this->data = $data;
+		
 		foreach ($this->fields as $id => $attributes) {
 
 			$input = array_key_exists($id, $data) ? $data[$id] : null;
@@ -117,7 +119,7 @@ class Engine
 			}
 		}
 
-		return (count($this->errors) > 0) ? false : true;
+		return $this->hasErrors() ? false : true;
 	}
 
 	public function getErrorSummary()
@@ -238,9 +240,42 @@ class Engine
 		return vsprintf($string, $params);
 	}
 
+	/**
+	 * Are there any validation errors?
+	 */
+	public function hasErrors()
+	{
+		return (count($this->errors) > 0);
+	}
+
+	/**
+	 * Retrieve a data element that was validated.
+	 *
+	 * Useful if you want to pass the validator into a view to prefill inputs.
+	 * 
+	 * @access public
+	 * @param mixed $field (default: null) The id of the element to return. If not provided, it will return the entire data array.
+	 * @return mixed
+	 */
+	public function getData($field = null)
+	{
+		if (empty($field)) {
+			// No element specified. Return all of the data that was validated.
+			return $this->data;
+		}
+		
+		if (!empty($this->data) && array_key_exists($field, $this->data)) {
+			return $this->data[$field];
+		}
+		
+		return null;
+	}
+	
 	public function reset()
 	{
-		$this->errors = [];
 		$this->fields = [];
+		$this->errors = [];
+		$this->messages = [];
+		$this->data = [];
 	}
 }
