@@ -49,6 +49,7 @@ bool startswith(mixed $input, string $match)
 bool endswith(mixed $input, string $match)
 bool contains(mixed $input, string $match)
 bool regex(mixed $input, string $regex)
+bool inlist(mixed $input, array $list)
 ```
 
 ### Validation Engine
