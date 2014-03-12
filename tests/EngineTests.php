@@ -47,6 +47,14 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(4, count($output));
 	}
 
+	public function testCanParseRuleStringWithArray()
+	{
+		$validator = new Engine();
+		$validator->addRule('color', 'Color', 'required|inlist{red,white,blue}');
+
+		$this->assertTrue($validator->validate(['color' => 'white']));
+	}
+	
 	public function testCanGetDefaultMessages()
 	{
 		$validator = new Engine();

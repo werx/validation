@@ -77,6 +77,8 @@ $validator->addRule('firstname', 'First Name', 'required|minlength[2]|alpha');
 	- Each rule corresponds to a method name from the Validator class
 	- If the method accepts arguments, the args should be in square brackets after the rule name
 		- Example: `minlength[2]`
+		- Exception: methods which accept an array as parameter should be in curly brackets after the rule name.
+			- Example: `inlist{red,white,blue}`
 	- Except for the `required` validator, all validators will return true if the input is empty.
 		- In other words, `minlength[2]` will only actually fire if you also add a `required` rule.
 

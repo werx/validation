@@ -48,6 +48,12 @@ class Engine
 
 				// There may be more than one parameters.
 				$rule_params = explode(',', $matches[1]);
+			} elseif (preg_match('/\{(.*?)\}/', $r, $matches)) {
+				// This one has an array parameter. Split out the rule name from it's parameters.
+				$rule_name = substr($r, 0, strpos($r, '{'));
+
+				// There may be more than one parameter.
+				$rule_params = array(explode(',', $matches[1]));
 			}
 
 			$return[$rule_name] = $rule_params;
