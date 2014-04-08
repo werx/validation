@@ -84,18 +84,22 @@ class Engine
 			$this->fields[$field] = ['label' => $label];
 		}
 
-		$rules = $this->parseRule($rules);
-
-		foreach ($rules as $rule => $params) {
-
-			if (count($params) > 0) {
-				foreach ($params as $param) {
-					$this->fields[$field]['rules'][$rule]['params'][] = $param;
+		if ($rules instanceof \Closure) {
+			$closure = $rules;
+			$this->fields[$field]['rules'][] = $closure;
+		} else {
+			$rules = $this->parseRule($rules);
+	
+			foreach ($rules as $rule => $params) {
+	
+				if (count($params) > 0) {
+					foreach ($params as $param) {
+						$this->fields[$field]['rules'][$rule]['params'][] = $param;
+					}
+				} else {
+					$this->fields[$field]['rules'][$rule]['params'] = [];
 				}
-			} else {
-				$this->fields[$field]['rules'][$rule]['params'] = [];
 			}
-
 		}
 	}
 
@@ -110,17 +114,25 @@ class Engine
 
 			foreach ($attributes['rules'] as $method => $opts) {
 
-				$args = [];
-				$args[] = $input;
+				if ($opts instanceof \Closure) {
+					list($success, $message) = $opts($this->data, $id, $label);
+					
+					if (!$success) {
+						$this->errors[$id][] = $message;
+					}
+				} else {
+					$args = [];
+					$args[] = $input;
+	
+					foreach ($opts['params'] as $param) {
+						$args[] = $param;
+					}
+	
+					$success = call_user_func_array([$this->validator, $method], $args);
 
-				foreach ($opts['params'] as $param) {
-					$args[] = $param;
-				}
-
-				$success = call_user_func_array([$this->validator, $method], $args);
-
-				if (!$success) {
-					$this->errors[$id][] = $this->getMessage($label, $method, $opts['params']);
+					if (!$success) {
+						$this->errors[$id][] = $this->getMessage($label, $method, $opts['params']);
+					}
 				}
 			}
 		}

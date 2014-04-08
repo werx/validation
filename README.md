@@ -88,10 +88,41 @@ Now you can get a validation result.
 $valid = $validator->validate($_POST);
 ```
 
+#### Closures
+In addition to predefined validation methods from the `Validator` class, you can also use [closures](http://www.php.net/manual/en/functions.anonymous.php) to create custom validation methods.
+
+``` php
+$closure = function ($data, $id, $label) {
+	$message = null;
+	$success = $data[$id] == 'Foo';
+	
+	if (!$success) {
+		$message = sprintf('%s must equal "Foo"', $label);
+	}
+	
+	return [$success, $message];
+};
+
+$validator->addRule('firstname', 'First Name', $closure);
+
+$valid = $validator->validate($_POST);
+```
+Three values will be passed to your closure:
+
+1. The full data set being validated.
+2. The id of the element being validated.
+3. The label for the element being validated.
+
+The closure is expected to return an array.
+
+- The first element of the array should be the validation result (`bool`).
+- The second element of the array should be an error message to display if validation failed.
+	- If validation passed, message may be null.
+
 #### Rulesets
 What if you want to save groups of rules instead of adding each rule individually every time you want to validate them?  We've got you covered.
 
-Create a new class that extends joshmoody\Validation\Ruleset and add your rules in the constructor.
+Create a new class that extends `joshmoody\Validation\Ruleset` and add your rules in the constructor.
 
 ``` php
 namespace your\namespace\Rulesets;

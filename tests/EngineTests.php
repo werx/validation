@@ -241,4 +241,45 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		
 		$this->assertEquals(null, $validator->getData('foo'));
 	}
+
+	public function testShouldPassClosure()
+	{
+		$validator = new Engine();
+		
+		$validator->addRule('foo', 'Foo', $this->getTestClosure());
+		
+		$valid = $validator->validate(['foo' => 'Foo']);
+		
+		$this->assertEquals(true, $valid);
+	}
+
+	public function testShouldFailClosure()
+	{
+		$validator = new Engine();
+		
+		$validator->addRule('foo', 'Foo', $this->getTestClosure());
+		
+		$valid = $validator->validate(['foo' => 'Bar']);
+		
+		$this->assertEquals(false, $valid);
+		
+		$errors = $validator->getErrorDetail();
+		$this->assertContains('Foo must equal "Foo"', $errors[0]['messages']);
+	}
+	
+	protected function getTestClosure()
+	{
+		$closure = function ($data, $id, $label) {
+			$message = null;
+			$success = $data[$id] == 'Foo';
+			
+			if (!$success) {
+				$message = sprintf('%s must equal "Foo"', $label);
+			}
+			
+			return [$success, $message];
+		};
+		
+		return $closure;		
+	}
 }
