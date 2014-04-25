@@ -1,6 +1,6 @@
 <?php
 
-namespace joshmoody\Validation;
+namespace werx\Validation;
 
 class Ruleset
 {

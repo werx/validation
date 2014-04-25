@@ -1,8 +1,8 @@
 <?php
 
-namespace joshmoody\Validation\Tests\Rulesets;
+namespace werx\Validation\Tests\Rulesets;
 
-use joshmoody\Validation\Ruleset;
+use werx\Validation\Ruleset;
 
 class Sample extends Ruleset
 {

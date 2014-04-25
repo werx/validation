@@ -1,6 +1,6 @@
 <?php
 
-namespace joshmoody\Validation;
+namespace werx\Validation;
 
 use \Exception;
 use \InvalidArgumentException;
@@ -24,7 +24,7 @@ class Engine
 
 		// Initialize default values for class variables.
 		$this->reset();
-		
+
 		$this->loadDefaultMessages();
 	}
 
@@ -64,15 +64,15 @@ class Engine
 
 	public function addRuleSet($ruleset)
 	{
-		if (!is_subclass_of($ruleset, 'joshmoody\Validation\Ruleset')) {
-			throw new InvalidArgumentException('ruleset must be a subclass of joshmoody\Validation\Ruleset');
+		if (!is_subclass_of($ruleset, 'werx\Validation\Ruleset')) {
+			throw new InvalidArgumentException('ruleset must be a subclass of werx\Validation\Ruleset');
 		}
-		
+
 		foreach ($ruleset->rules as $rule) {
 			$this->addRule($rule['field'], $rule['label'], $rule['rules']);
 		}
 	}
-	
+
 	public function addRule($field = null, $label = null, $rules = null)
 	{
 		if (empty($field) || empty($label) || empty($rules)) {
@@ -89,9 +89,9 @@ class Engine
 			$this->fields[$field]['rules'][] = $closure;
 		} else {
 			$rules = $this->parseRule($rules);
-	
+
 			foreach ($rules as $rule => $params) {
-	
+
 				if (count($params) > 0) {
 					foreach ($params as $param) {
 						$this->fields[$field]['rules'][$rule]['params'][] = $param;
@@ -106,7 +106,7 @@ class Engine
 	public function validate($data = [])
 	{
 		$this->data = $data;
-		
+
 		foreach ($this->fields as $id => $attributes) {
 
 			$input = array_key_exists($id, $data) ? $data[$id] : null;
@@ -116,18 +116,18 @@ class Engine
 
 				if ($opts instanceof \Closure) {
 					list($success, $message) = $opts($this->data, $id, $label);
-					
+
 					if (!$success) {
 						$this->errors[$id][] = $message;
 					}
 				} else {
 					$args = [];
 					$args[] = $input;
-	
+
 					foreach ($opts['params'] as $param) {
 						$args[] = $param;
 					}
-	
+
 					$success = call_user_func_array([$this->validator, $method], $args);
 
 					if (!$success) {
@@ -155,12 +155,12 @@ class Engine
 	public function getErrorSummaryFormatted($outerwrapper = ['<div class="alert alert-danger"><ul>','</ul></div>'], $innerwrapper = ['<li>','</li>'])
 	{
 		$summary = $this->getErrorSummary();
-		
+
 		if (count($summary) > 0) {
 			$formatted = [];
-			
+
 			$formatted[] = $outerwrapper[0];
-			
+
 			foreach ($summary as $s) {
 				$formatted[] = $innerwrapper[0];
 				$formatted[] = $s;
@@ -168,25 +168,25 @@ class Engine
 			}
 
 			$formatted[] = $outerwrapper[1];
-			
+
 			return join($formatted, PHP_EOL);
-			
+
 		} else {
 			return null;
 		}
 	}
-	
+
 	public function getErrorDetail()
 	{
 		$detail = [];
-		
+
 		foreach ($this->errors as $field => $messages) {
 			$detail[] = ['field' => $field, 'messages' => $messages];
 		}
-		
+
 		return $detail;
 	}
-	
+
 	public function getErrorFields()
 	{
 		$fields = [];
@@ -244,7 +244,7 @@ class Engine
 	{
 		$this->messages[$validator]	= $message;
 	}
-	
+
 	public function getMessage($field, $rule, $params = [])
 	{
 
@@ -270,7 +270,7 @@ class Engine
 	 * Retrieve a data element that was validated.
 	 *
 	 * Useful if you want to pass the validator into a view to prefill inputs.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $field (default: null) The id of the element to return. If not provided, it will return the entire data array.
 	 * @return mixed
@@ -281,14 +281,14 @@ class Engine
 			// No element specified. Return all of the data that was validated.
 			return $this->data;
 		}
-		
+
 		if (!empty($this->data) && array_key_exists($field, $this->data)) {
 			return $this->data[$field];
 		}
-		
+
 		return null;
 	}
-	
+
 	public function reset()
 	{
 		$this->fields = [];

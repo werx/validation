@@ -2,7 +2,7 @@
 
 Simple input validation.
 
-[![Build Status](https://travis-ci.org/joshmoody/validation.png?branch=master)](https://travis-ci.org/joshmoody/validation) [![Total Downloads](https://poser.pugx.org/joshmoody/validation/downloads.png)](https://packagist.org/packages/joshmoody/validation) [![Latest Stable Version](https://poser.pugx.org/joshmoody/validation/v/stable.png)](https://packagist.org/packages/joshmoody/validation)
+[![Build Status](https://travis-ci.org/werx/validation.png?branch=master)](https://travis-ci.org/werx/validation) [![Total Downloads](https://poser.pugx.org/werx/validation/downloads.png)](https://packagist.org/packages/werx/validation) [![Latest Stable Version](https://poser.pugx.org/werx/validation/v/stable.png)](https://packagist.org/packages/werx/validation)
 
 ## Usage
 There are two components to this library. A set of validation methods and an input validation engine.
@@ -14,7 +14,7 @@ The Validator class can be used to quickly validate a single piece of input.
 ``` php
 include 'vendor/autoload.php';
 
-use joshmoody\Validation\Validator;
+use werx\Validation\Validator;
 
 $input = 'foo';
 $valid = Validator::minlength($input, 4);
@@ -59,7 +59,7 @@ The Validation Engine is used to validate a set of data against a set of rules.
 First, get an instance of the Validation Engine:
 
 ``` php
-use joshmoody\Validation\Engine as ValidationEngine;
+use werx\Validation\Engine as ValidationEngine;
 
 $validator = new ValidationEngine;
 ```
@@ -122,12 +122,12 @@ The closure is expected to return an array.
 #### Rulesets
 What if you want to save groups of rules instead of adding each rule individually every time you want to validate them?  We've got you covered.
 
-Create a new class that extends `joshmoody\Validation\Ruleset` and add your rules in the constructor.
+Create a new class that extends `werx\Validation\Ruleset` and add your rules in the constructor.
 
 ``` php
 namespace your\namespace\Rulesets;
 
-use joshmoody\Validation\Ruleset;
+use werx\Validation\Ruleset;
 
 class Contact extends Ruleset
 {
@@ -240,7 +240,7 @@ Create a file named composer.json somewhere in your project with the following c
 ``` json
 {
 	"require": {
-		"joshmoody/validation": "dev-master"
+		"werx/validation": "dev-master"
 	}
 }
 ```

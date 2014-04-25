@@ -1,9 +1,9 @@
 <?php
 
-namespace joshmoody\Validation\Tests;
+namespace werx\Validation\Tests;
 
-use joshmoody\Validation\Engine;
-use joshmoody\Validation\Tests\Rulesets as Rulesets;
+use werx\Validation\Engine;
+use werx\Validation\Tests\Rulesets as Rulesets;
 
 class EngineTests extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +54,7 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue($validator->validate(['color' => 'white']));
 	}
-	
+
 	public function testCanGetDefaultMessages()
 	{
 		$validator = new Engine();
@@ -211,14 +211,14 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals(6, count($error_detail), 'There should be 6 fields with errors here.');
 	}
-	
+
 	public function testCanGetDataField()
 	{
 		$validator = new Engine();
 		$validator->addRule('name', 'Name', 'required');
-		
+
 		$result = $validator->validate(['name' => 'Josh']);
-		
+
 		$this->assertEquals('Josh', $validator->getData('name'));
 	}
 
@@ -226,9 +226,9 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 	{
 		$validator = new Engine();
 		$validator->addRule('name', 'Name', 'required');
-		
+
 		$result = $validator->validate(['name' => 'Josh']);
-		
+
 		$this->assertInternalType('array', $validator->getData());
 	}
 
@@ -236,50 +236,50 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 	{
 		$validator = new Engine();
 		$validator->addRule('name', 'Name', 'required');
-		
+
 		$result = $validator->validate(['name' => 'Josh']);
-		
+
 		$this->assertEquals(null, $validator->getData('foo'));
 	}
 
 	public function testShouldPassClosure()
 	{
 		$validator = new Engine();
-		
+
 		$validator->addRule('foo', 'Foo', $this->getTestClosure());
-		
+
 		$valid = $validator->validate(['foo' => 'Foo']);
-		
+
 		$this->assertEquals(true, $valid);
 	}
 
 	public function testShouldFailClosure()
 	{
 		$validator = new Engine();
-		
+
 		$validator->addRule('foo', 'Foo', $this->getTestClosure());
-		
+
 		$valid = $validator->validate(['foo' => 'Bar']);
-		
+
 		$this->assertEquals(false, $valid);
-		
+
 		$errors = $validator->getErrorDetail();
 		$this->assertContains('Foo must equal "Foo"', $errors[0]['messages']);
 	}
-	
+
 	protected function getTestClosure()
 	{
 		$closure = function ($data, $id, $label) {
 			$message = null;
 			$success = $data[$id] == 'Foo';
-			
+
 			if (!$success) {
 				$message = sprintf('%s must equal "Foo"', $label);
 			}
-			
+
 			return [$success, $message];
 		};
-		
-		return $closure;		
+
+		return $closure;
 	}
 }

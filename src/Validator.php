@@ -1,6 +1,6 @@
 <?php
 
-namespace joshmoody\Validation;
+namespace werx\Validation;
 
 class Validator
 {
@@ -15,7 +15,7 @@ class Validator
 		if (empty($input)) {
 			return true;
 		}
-		
+
 		switch($format) {
 			case 'YYYY/MM/DD':
 			case 'YYYY-MM-DD':
@@ -233,7 +233,7 @@ class Validator
 
 		return (bool) preg_match($regex, $input);
 	}
-	
+
 	public static function inlist($input = null, $list = [])
 	{
 		if (empty($input)) {

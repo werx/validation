@@ -1,7 +1,7 @@
 <?php
-namespace joshmoody\Validation\Tests;
+namespace werx\Validation\Tests;
 
-use joshmoody\Validation\Validator;
+use werx\Validation\Validator;
 
 class ValidatorTests extends \PHPUnit_Framework_TestCase
 {
@@ -294,7 +294,7 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertFalse(Validator::inlist('ABCDEF', ['ABC','DEF']));
 	}
-	
+
 	public function testShouldPassInlist()
 	{
 		$this->assertTrue(Validator::inlist(null, ['ABC','DEF']));
