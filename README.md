@@ -88,6 +88,21 @@ Now you can get a validation result.
 $valid = $validator->validate($_POST);
 ```
 
+##### Validating Input Arrays
+Sometimes you aren't using a simple string as your input field name. Let's say your HTML input form is something like this:
+
+```html
+<input type="text" name="volunteer[name]">
+<input type="text" name="volunteer[email]">
+```
+
+To build a rule for in this scenario, separate the array name and key name with a period when adding your rule.
+
+``` php
+$validator->addRule('volunteer.name', 'Name', 'required|minlength[2]|alpha');
+$validator->addRule('volunteer.email', 'Email Address', 'required|email');
+```
+
 #### Closures
 In addition to predefined validation methods from the `Validator` class, you can also use [closures](http://www.php.net/manual/en/functions.anonymous.php) to create custom validation methods.
 

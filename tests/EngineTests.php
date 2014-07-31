@@ -115,6 +115,26 @@ class EngineTests extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($result);
 	}
 
+	public function testShouldPassValidationWithArrayFieldId()
+	{
+		$validator = new Engine();
+		$validator->addRule('name.first', 'First Name', 'required|minlength[2]');
+		$data = [];
+		$data['name']['first'] = 'Josh';
+		$result = $validator->validate($data);
+		$this->assertTrue($result);
+	}
+
+	public function testShouldFailValidationWithArrayFieldId()
+	{
+		$validator = new Engine();
+		$validator->addRule('name.first', 'First Name', 'required|minlength[2]');
+		$data = [];
+		$data['name']['first'] = 'J';
+		$result = $validator->validate($data);
+		$this->assertFalse($result);
+	}
+
 	public function testCanGetErrorSummary()
 	{
 		$validator = new Engine();

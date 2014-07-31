@@ -109,7 +109,15 @@ class Engine
 
 		foreach ($this->fields as $id => $attributes) {
 
-			$input = array_key_exists($id, $data) ? $data[$id] : null;
+			if (strpos($id, '.') > 0) {
+				// We are dealing with an array.
+				list($parent, $child) = explode('.', $id);
+				$input = isset($data[$parent][$child]) ? $data[$parent][$child] : null;
+			} else {
+				$input = array_key_exists($id, $data) ? $data[$id] : null;
+			}
+
+
 			$label = $attributes['label'];
 
 			foreach ($attributes['rules'] as $method => $opts) {
