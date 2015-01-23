@@ -7,14 +7,14 @@
 	"authors": [
 		{
 			"name": "Josh Moody",
-			"email": "jgmoody@gmail.com"
+			"email": "josh@moody.io"
 		}
 	],
 	"require": {
 		"php": ">= 5.4"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "3.7.*",
+		"phpunit/phpunit": "4.4.*",
 		"squizlabs/php_codesniffer": "1.*"
 	},
 	"autoload": {
