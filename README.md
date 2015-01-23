@@ -244,22 +244,11 @@ $validator->addCustomMessage('minlength', "Oops, {name} must be at least %d char
 
 
 ## Installation
-Installation of this package is easy with Composer. If you aren't familiar with the Composer Dependency Manager for PHP, [you should read this first](https://getcomposer.org/doc/00-intro.md).
+This package is installable and autoloadable via Composer as [werx/validation](https://packagist.org/packages/werx/validation). If you aren't familiar with the Composer Dependency Manager for PHP, [you should read this first](https://getcomposer.org/doc/00-intro.md).
 
-If you don't already have [Composer](https://getcomposer.org) installed (either globally or in your project), you can install it like this:
-
-	$ curl -sS https://getcomposer.org/installer | php
-
-Create a file named composer.json somewhere in your project with the following content:
-
-``` json
-{
-	"require": {
-		"werx/validation": "dev-master"
-	}
-}
+```bash
+$ composer require werx/validation --prefer-dist
 ```
-
 
 ## Contributing
 
