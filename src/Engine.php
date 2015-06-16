@@ -25,6 +25,12 @@ class Engine
 		// Initialize default values for class variables.
 		$this->reset();
 
+		$language_file = sprintf('languages/%s.php', basename(strtolower($language)));
+
+		if (!@include_once($language_file)) {
+		    throw new \Exception("Specified language doesn't exist");
+		}
+
 		$this->loadDefaultMessages($language);
 	}
 
