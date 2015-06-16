@@ -13,7 +13,7 @@ class Engine
 	public $messages;
 	public $data;
 
-	public function __construct($validator = null)
+	public function __construct($validator = null, $language='en')
 	{
 		if (empty($validator)) {
 			// Use the default validation engine.
@@ -25,7 +25,7 @@ class Engine
 		// Initialize default values for class variables.
 		$this->reset();
 
-		$this->loadDefaultMessages();
+		$this->loadDefaultMessages($language);
 	}
 
 	public function parseRule($input)
@@ -219,29 +219,9 @@ class Engine
 		return $required;
 	}
 
-	public function loadDefaultMessages()
+	public function loadDefaultMessages($language)
 	{
-		$messages = [];
-		$messages['required'] = '{name} is a required field.';
-		$messages['date'] = '{name} must be a valid date.';
-		$messages['minlength'] = '{name} must be at least %s characters long.';
-		$messages['maxlength'] = '{name} cannot be longer than %d characters.';
-		$messages['exactlength'] = '{name} must be exactly %d characters.';
-		$messages['greaterthan'] = '{name} must be greater than %d.';
-		$messages['lessthan'] = '{name} must be less than %d.';
-		$messages['alpha'] = '{name} must only contain the letters A-Z.';
-		$messages['alphanumeric'] = '{name} must only contain the letters A-Z and numbers 0-9.';
-		$messages['integer'] = '{name} must be a whole number with no decimals';
-		$messages['float'] = '{name} must be a number.';
-		$messages['numeric'] = '{name} must be numeric.';
-		$messages['email'] = '{name} must be a valid email address.';
-		$messages['url'] = '{name} must be a valid url.';
-		$messages['phone'] = '{name} must be a valid phone number.';
-		$messages['zipcode'] = '{name} must be a valid zip code.';
-		$messages['startswith'] = '{name} must start with %s.';
-		$messages['endswith'] = '{name} must end with %s.';
-		$messages['contains'] = '{name} must contain %s.';
-		$messages['regex'] = '{name} is not in the correct format.';
+		require 'languages/'.$language.'.php';
 
 		foreach ($messages as $key => $value) {
 			$this->messages[$key] = $value;

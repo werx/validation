@@ -1,0 +1,22 @@
+<?php
+$messages = [];
+$messages['required'] = '{name} es un campo obligatorio.';
+$messages['date'] = '{name} debe ser una fecha válida.';
+$messages['minlength'] = '{name} debe tener al menos %s caracteres.';
+$messages['maxlength'] = '{name} no puede tener más de %d caracteres.';
+$messages['exactlength'] = '{name} debe tener exactamente %d caracteres.';
+$messages['greaterthan'] = '{name} debe ser mayor que %d.';
+$messages['lessthan'] = '{name} debe ser menor que %d.';
+$messages['alpha'] = '{name} solo debe contener letras de A-Z.';
+$messages['alphanumeric'] = '{name} solo debe contener letras de A-Z y números del 0-9.';
+$messages['integer'] = '{name} debe ser un número entero sin decimales';
+$messages['float'] = '{name} debe ser un número.';
+$messages['numeric'] = '{name} debe ser numérico.';
+$messages['email'] = '{name} debe ser una dirección válida de correo electrónico.';
+$messages['url'] = '{name} debe ser una URL válida.';
+$messages['phone'] = '{name} debe ser un número de teléfono válido.';
+$messages['zipcode'] = '{name} debe ser un código postal válido.';
+$messages['startswith'] = '{name} debe comenzar con %s.';
+$messages['endswith'] = '{name} debe terminar con %s.';
+$messages['contains'] = '{name} debe contener %s.';
+$messages['regex'] = '{name} no está en el formato correcto.';
