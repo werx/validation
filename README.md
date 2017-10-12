@@ -50,6 +50,7 @@ bool endswith(mixed $input, string $match)
 bool contains(mixed $input, string $match)
 bool regex(mixed $input, string $regex)
 bool inlist(mixed $input, array $list)
+bool json(mixed $input)
 ```
 
 ### Validation Engine

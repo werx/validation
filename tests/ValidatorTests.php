@@ -300,4 +300,24 @@ class ValidatorTests extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(Validator::inlist(null, ['ABC','DEF']));
 		$this->assertTrue(Validator::inlist('ABC', ['ABC','DEF']));
 	}
+
+	public function testShouldFailJson()
+	{
+		$this->assertFalse(Validator::json('asd;flkj'));
+	}
+
+	public function testShouldPassJson()
+	{
+		$this->assertTrue(Validator::json('{"widget": {
+		    "debug": "on",
+		    "window": {
+		        "title": "Sample Konfabulator Widget",
+		        "name": "main_window",
+		        "width": 500,
+		        "height": 500
+		    }}}'
+		));
+
+		$this->assertTrue(Validator::json('{}'));
+	}
 }
