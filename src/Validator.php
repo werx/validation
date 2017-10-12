@@ -242,4 +242,15 @@ class Validator
 
 		return in_array($input, $list);
 	}
+
+	public static function json($input = null)
+	{
+		if (empty($input)) {
+			return true;
+		}
+
+		$attempted_parsed_json = json_decode($input, true);
+
+		return ( $attempted_parsed_json !== null );
+	}
 }
